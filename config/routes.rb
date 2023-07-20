@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  resources :messages, only: %i[index]
-  resources :users, only: %i[index create] do
+  resources :messages, only: %i[index destroy]
+  resources :users, only: %i[index create destroy] do
     post 'add_message'
     post 'change_status'
   end
