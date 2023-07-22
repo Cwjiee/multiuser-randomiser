@@ -6,7 +6,7 @@ class UsersController < ApplicationController
 
   def create
     user = User.new(username: params[:username])
-    ActionCable.server.broadcast('user_channel', user) if user.save
+    ActionCable.server.broadcast('UsersChannel', user) if user.save
     render json: user
   end
 
@@ -18,7 +18,7 @@ class UsersController < ApplicationController
   def add_message
     user = User.find(params[:user_id])
     created_message = user.messages.create(content: params[:message])
-    ActionCable.server.broadcast('message_channel', created_message) if user.save
+    ActionCable.server.broadcast('MessageChannel', created_message) if user.save
     head :ok
   end
   
