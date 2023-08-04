@@ -18,6 +18,7 @@ class UsersController < ApplicationController
   def add_message
     user = User.find(params[:user_id])
     created_message = user.messages.create(content: params[:message])
+    user.update(sent: true)
     ActionCable.server.broadcast('MessageChannel', created_message) if user.save
     head :ok
   end
