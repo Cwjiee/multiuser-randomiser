@@ -13,7 +13,7 @@ class User < ApplicationRecord
 
     if confirm
       msg = find_duplicate
-      ActionCable.server.broadcast('MessageChannel', { content: msg, user_id: User.first.id})
+      ActionCable.server.broadcast('MessageChannel', { content: msg, system_message: true})
     end
   end
 
