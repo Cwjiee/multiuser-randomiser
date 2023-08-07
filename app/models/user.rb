@@ -13,7 +13,9 @@ class User < ApplicationRecord
 
     if confirm
       msg = find_duplicate
+      finalResult = msg[rand(msg.length)]
       ActionCable.server.broadcast('MessageChannel', { content: msg, system_message: true})
+      ActionCable.server.broadcast('MessageChannel', { content: finalResult, result_message: true})
     end
   end
 
